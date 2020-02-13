@@ -2,7 +2,7 @@ import unittest
 import tensorflow as tf
 import keras.backend as K
 
-from ..Utils.selfAttention.SelfAttentionLayer import SelfAttention
+from . import SelfAttentionLayer
 
 class TestSelfAttention(unittest.TestCase):
     def setUp(self):
