@@ -26,7 +26,7 @@ import SelfAttentionLayer
 
 Inputs = Input(shape=(seq_train.shape[1],))
 
-Embeddings = Embedding(len(tokenizer.vocab), 512, input_length = seq_train.shape[1], weights = [embedding_matrix]) #
+Embeddings = Embedding(len(tokenizer.vocab), 512, input_length = seq_train.shape[1], weights = [embedding_matrix])
 
 Embeded = Embeddings(Inputs)
 

@@ -4,15 +4,7 @@ from keras.layers import Layer
 
 class SelfAttention(Layer):
     '''
-    Description :
-    -------------
-    Layer keras de self-attention
-    Plusieurs possibilites d'utilisation
-        - Sequential
-        - API
-        - Subclass
-        
-    Le layer peut etre utilise pour de l'extraction de sentiment
+
     '''
     def __init__(self,
                  d_a = int,
@@ -51,7 +43,7 @@ class SelfAttention(Layer):
                                   name='W2',
                                   regularizer=self.kernel_regularizer)
 
-        self.input_spec = keras.layers.InputSpec(min_ndim = 2, axes = {-1: input_dim}) # définir les dimensions de l'input en entrée du layer
+        self.input_spec = keras.layers.InputSpec(min_ndim = 2, axes = {-1: input_dim})
         self.built = True
         super(SelfAttention, self).build(input_shape)
 
@@ -74,12 +66,12 @@ class SelfAttention(Layer):
             return sentence_embedding
 
     def _compute_first_output(self, inputs):
-        # Transpose la matrice pour le batch size
+
         permute_input = K.permute_dimensions(inputs, pattern = (0, 2, 1))
 
         output = K.dot(self.W1, permute_input)
 
-        permute_output = K.permute_dimensions(output, pattern = (1, 0, 2)) #On replace le batch en première dimension
+        permute_output = K.permute_dimensions(output, pattern = (1, 0, 2)) 
 
         activation_output = K.tanh(permute_output)
 
@@ -89,7 +81,7 @@ class SelfAttention(Layer):
 
         output = K.dot(self.W2, first_linear)
 
-        permute_output = K.permute_dimensions(output, pattern = (1, 0, 2)) # Pour le batch
+        permute_output = K.permute_dimensions(output, pattern = (1, 0, 2)) 
 
         activation_output = K.softmax(permute_output, axis = 2)
 
